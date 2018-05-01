@@ -74,7 +74,9 @@ class Meeple(object):
         return self.is_minor_bleeding or self.is_major_bleeding
     def dies(self):
         '''
-        Kills the Meeple, and remove it from the board and game. Its equipment is dropped on the ground
+        Kills the Meeple, and remove it from the board and game. 
+        Its equipment is dropped on the ground
+        It leave its group
         '''
         raise NotImplementedError
         
@@ -112,6 +114,9 @@ class Meeple(object):
         Move from the Meeple position to an ADJACENT tile in a direction (NE, EAST, SE, SW, WEST, NW).
         Cost is 1 AP, unless Meeple has conditions
         
+        !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            WARNING : @Hadrien n'est pas tout à fait fixé sur le board (est-ce qu'il y aura des bords ou pas). Ne pas implémenter.
+        !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         Notes : 
         . Encounters are to be resolved in this function, using the encounter table of the Tile class
         . If the adjacent Tile does'nt exist (has not been revealed), the board method add_tile() is called
@@ -234,7 +239,35 @@ class Group(object):
             new_member.group = self
         else:
             print("Error : target meeple already in a group ! ")
-            
+    def can_single_action(self):
+        '''
+        Check if ALL the members of the group can perform a 1-AP action 
+        '''
+        raise NotImplementedError
+    def action_move(self, direction):
+        '''
+        All group members perform the move action.
+        Only one encounter happens.
+        '''       
+        raise NotImplementedError
+    def action_explore(self):
+        '''
+        All group members perform the explore action.
+        Only useful to fight a cave bear ?
+        '''
+        raise NotImplementedError
+    def action_hunt(self):
+        '''
+        All group members perform the hunt action.
+        Only one (group of) animal is encountered, but all capacities can be used
+        ''' 
+        raise NotImplementedError
+    def join_group(self, Group):
+        '''
+        Merges two group together. The group that calls this method is destroyed, and the called group gets bigger
+        '''
+        raise NotImplementedError
+    
 class Craftsman(Meeple):
     '''
      Rules :
