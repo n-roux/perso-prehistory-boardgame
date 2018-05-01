@@ -5,11 +5,12 @@ Created on 26 avr. 2018
 '''
 from Tkinter import *
 
-'''
 
 '''
 
-class MasterGUI(object):
+'''
+
+class game_GUI(object):
     '''
     GUI is not started yet.
     
