@@ -10,6 +10,7 @@ import random
 
 NORMAL = 0
 
+
 class Game(object):
     '''
     Master class that handles all events not decided by players. An instance of this class is created to start a game, and it creates instances of all necessary components of a game
